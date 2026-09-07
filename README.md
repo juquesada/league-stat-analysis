@@ -1,4 +1,3 @@
-# league-stat-analysis
 <section id="introduction">
  <h2>Introduction</h2>
 
@@ -602,4 +601,21 @@
     </tr>
   </tbody>
 </table>
+</section>
+<section id="gold-distribution">
+  <h3>Distribution of Gold at 15 Minutes</h3>
+
+  <iframe
+  src="/Users/justinquesada/Desktop/league-stat-analysis/gold-at-15-distribution.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe>
+
+  <p>
+    The distribution of team gold at 15 minutes is roughly normal and centered around
+    typical professional-game gold totals, with a slight right skew. This shows a small number of teams
+    build unusually large early gold leads, while most teams cluster closer to an even, average gold total at
+    this point in the game.
+  </p>
 </section>
