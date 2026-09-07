@@ -632,9 +632,9 @@
 
   <p>
     Teams that secure first blood tend to finish the game with a higher median total kill
-    count than teams that don't, suggesting that winning the opening skirmish often sets the
-    tone for a more aggressive, kill-heavy game overall rather than being an isolated early
-    event.
+    count than teams that don't. This suggests that winning the first fight often sets the
+    tone the team that won allowing them to get more kills as the game progress. This shows that 
+    early events can be important for overall game stats and endings. 
   </p>
 </section>
 <section id="grouped-gold-stats">
@@ -719,10 +719,10 @@
   <p>
     This table breaks down the mean, median, and standard deviation of team gold at 10, 15,
     20, and 25 minutes, separately for winning and losing teams. The gap between winning and
-    losing teams' average gold widens at each successive time stamp, suggesting that gold
+    losing teams' average gold gets bigger at each successive time stamp. This suggests that gold
     leads tend to snowball over the course of a game rather than staying constant. An early
     advantage tends to compound into an even larger one by the 25-minute mark. The standard
-    deviations also grow over time for both groups, reflecting the fact that games become more
+    deviations also grow over time for both groups. This reflects the fact that games become more
     variable the longer they go on, since more time allows for both bigger blowouts and bigger
     comebacks.
   </p>
@@ -742,10 +742,8 @@
   
   <p>
     Rows with minionkills missing had cspm missing as well which is why I will only perform one permutation test on cspm. 
-    Either column would have worked though. 
-
-</section>
-<section id="missingness-permutation-tests">
+    Either column would have worked though.
+  </p>
   <h3>Permutation Test Results</h3>
 
   <p>
@@ -766,7 +764,7 @@
   <p>
     Using the difference in mean <code>gamelength</code> between the missing and non-missing
     groups as my test statistic, I observed a difference of <strong>56.190 seconds</strong>,
-    and a permutation test (1,000 repetitions) produced a p-value of <strong>0.0010</strong>.
+    and a permutation test (1,000 repetitions) produced a p-value of <strong>0.00000</strong>.
     Since this p-value is well below 0.05, I <strong>reject the null hypothesis</strong>
   </p>
 
@@ -1119,7 +1117,7 @@
     <strong>Precision (Short games):</strong> 0.8565<br>
     <strong>Precision (Long games):</strong> 0.6054<br>
     <strong>Observed difference (Short − Long):</strong> 0.2512<br>
-    <strong>P-value:</strong> 0.0010
+    <strong>P-value:</strong> 0.00000
   </p>
 
   <iframe
