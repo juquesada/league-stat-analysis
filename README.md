@@ -730,7 +730,7 @@
 <section id="assessment-of-missingness">
   <h2>Assessment of Missingness</h2>
 
-  <h3>Is <code>cspm</code> MNAR?</h3>
+  <h3>Are any columns MNAR?</h3>
 
   <p>
     Based on my analysis, I do <strong>not</strong> believe any column in my dataset is Missing Not At Random (<strong>MNAR</strong>). 
@@ -772,7 +772,7 @@
 
   <iframe
     src="assets/missing.html"
-    width="800"
+    width="600"
     height="600"
     frameborder="0">
   </iframe>
