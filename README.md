@@ -960,3 +960,98 @@
     that it can get better.
   </p>
 </section>
+<section id="final-model">
+  <h2>Final Model</h2>
+
+  <h3>Engineered Features</h3>
+
+  <p>
+    In addition to the raw features from my baseline model, I engineered two new features:
+    <code>kdaat10</code> and <code>kdaat15</code>, computed as
+    <code>(kills + assists) / max(deaths, 1)</code> at the 10- and 15-minute marks.
+  </p>
+
+  <p>
+    I believe these features are well-suited to the data generating process because KDA is a
+    <strong>single, well-established summary statistic</strong> that everyone already uses
+    to judge a player or team's combat performance. A decision tree can only split on
+    one raw feature at a time, so to approximate "this team is winning fights efficiently," it
+    would otherwise need to chain together several separate splits across <code>kills</code>,
+    <code>assists</code>, and <code>deaths</code> independently. By directly providing the
+    ratio, I'm handing the model a feature that more closely mirrors how the underlying game
+    state actually translates into an advantage: a team with a high KDA is one that is
+    consistently winning fights without giving up equivalent value in return, and that
+    kind of efficient aggression is a natural predictor of snowballing into a game-winning lead.
+  </p>
+
+  <h3>Modeling Algorithms Considered</h3>
+
+  <p>
+    I compared three modeling algorithms: a <strong>Decision Tree Classifier</strong>, a
+    <strong>Logistic Regression</strong> model, and a <strong>K-Nearest Neighbors
+    Classifier</strong>. For DTC and KNN, I built a <code>Pipeline</code> that computed the engineered
+    KDA features via a <code>ColumnTransformer</code> (and, for logistic regression and KNN,
+    applied <code>StandardScaler</code> to all quantitative features, since both of these
+    algorithms are scale-sensitive, unlike decision trees). I chose not to include KDA for logistic regression 
+    because it could have multicollinearity with other features.
+  </p>
+
+  <h3>Hyperparameter Selection</h3>
+
+  <p>
+    For each algorithm, I used <strong><code>GridSearchCV</code> with 5-fold
+    cross-validation</strong> to search over a grid of candidate hyperparameters and select the
+    combination that maximized cross-validated accuracy on the training set:
+  </p>
+
+  <ul>
+    <li>
+      <strong>Decision Tree:</strong> searched over <code>max_depth</code>,
+      <code>criterion</code>, <code>min_samples_split</code>, and <code>min_samples_leaf</code>.
+    </li>
+    <li>
+      <strong>Logistic Regression:</strong> searched over <code>C</code> (regularization
+      strength), <code>penalty</code>, and <code>solver</code>.
+    </li>
+    <li>
+      <strong>K-Nearest Neighbors:</strong> searched over <code>n_neighbors</code>,
+      <code>weights</code>, and <code>metric</code>.
+    </li>
+  </ul>
+
+  <p>
+    I then compared each algorithm's best cross-validated accuracy and held-out test accuracy,
+    and selected <strong>Logistic Regression</strong> as my final model, since it achieved the
+    highest test accuracy among the three.
+  </p>
+
+  <p>
+    <strong>Best hyperparameters found:</strong> <code>C=0.01</code>, <code>penalty='l2'</code>,
+    <code>solver='saga'</code>.
+  </p>
+
+  <p>
+    A small <code>C</code> value (0.01) corresponds to <strong>strong regularization</strong>,
+    which shrinks the model's coefficients toward zero. This makes sense given the data
+    generating process: several of my features (e.g., <code>goldat15</code> and
+    <code>xpat15</code>, or <code>kdaat15</code> and its raw components) are naturally
+    correlated with one another, since gold, experience, and combat stats all tend to move
+    together as a team accumulates an early advantage. Strong regularization helps the model
+    avoid over-relying on any single one of these highly correlated signals and instead spreads the
+    weight across them, which should generalize better to new games rather
+    than fitting noise specific to the training set.
+  </p>
+
+  <h3>Improvement Over Baseline</h3>
+
+  <p>
+    My baseline decision tree (<code>max_depth=5</code>, <code>criterion='entropy'</code>,
+    untuned) achieved a test accuracy of <strong>0.714</strong>. My final,
+    tuned logistic regression model achieved a test accuracy of
+    <strong>0.741</strong>, an improvement of roughly
+    <strong>3</strong> percentage points. This improvement reflects two combined
+    changes: (1) searching for well-tuned hyperparameters via cross-validation,
+    and (2) adding the engineered KDA features/standardizing.
+  </p>
+  <img src="assets/cm.png" alt="Confusion Matrix">
+</section>
