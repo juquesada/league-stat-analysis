@@ -1034,7 +1034,7 @@
     A small <code>C</code> value (0.01) corresponds to <strong>strong regularization</strong>,
     which shrinks the model's coefficients toward zero. This makes sense given the data
     generating process: several of my features (e.g., <code>goldat15</code> and
-    <code>xpat15</code>, or <code>kdaat15</code> and its raw components) are naturally
+    <code>xpat15</code> are naturally
     correlated with one another, since gold, experience, and combat stats all tend to move
     together as a team accumulates an early advantage. Strong regularization helps the model
     avoid over-relying on any single one of these highly correlated signals and instead spreads the
