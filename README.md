@@ -1135,7 +1135,7 @@
   <h3>Conclusion</h3>
 
   <p>
-    [If p_value &lt; 0.05:] Since the p-value is below my significance level of 0.05, I
+    Since the p-value is below my significance level of 0.05, I
     <strong>reject the null hypothesis</strong>. There is a high chance that my 
     model's precision is lower for teams in long games than for teams in short games,
     supporting the idea that early-game (15-minute) statistics are a less reliable
