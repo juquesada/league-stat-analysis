@@ -739,17 +739,6 @@
     respective columns would not have any data. For minionkills and cspm, these could be MNAR but in order to find out
     I would have to perform a permutation test to show that its missingness is not dependent on any other column.
   </p>
-
-  <p>
-    For a column to be MNAR, its missingness would need to depend on the <em>value that's
-    missing itself</em>. For example, if <code>cspm</code> were more likely to be missing
-    specifically <em>because</em> it was unusually low or high (e.g., a stat-tracking tool
-    failing to log unusually slow or fast farming performances). I don't have strong evidence
-    of that. The more plausible explanation is that certain games, particularly
-    longer games, or games from a specific patch/period/broadcast source simply weren't fully
-    tracked by whatever timeline-parsing tool Oracle's Elixir used to compute per-minute stats,
-    regardless of what the actual CS value would have been.
-  </p>
   
   <p>
     Rows with minionkills missing had cspm missing as well which is why I will only perform one permutation test on cspm. 
@@ -776,11 +765,9 @@
 
   <p>
     Using the difference in mean <code>gamelength</code> between the missing and non-missing
-    groups as my test statistic, I observed a difference of <strong>[observed_diff] seconds</strong>,
-    and a permutation test (1,000 repetitions) produced a p-value of <strong>[p_value]</strong>.
-    Since this p-value is well below 0.05, I <strong>reject the null hypothesis</strong> — there
-    is strong evidence that the missingness of <code>cspm</code> depends on
-    <code>gamelength</code>, consistent with <strong>Missing At Random (MAR)</strong>.
+    groups as my test statistic, I observed a difference of <strong>56.190 seconds</strong>,
+    and a permutation test (1,000 repetitions) produced a p-value of <strong>0.0010</strong>.
+    Since this p-value is well below 0.05, I <strong>reject the null hypothesis</strong>
   </p>
 
   <iframe
@@ -794,37 +781,13 @@
     The plot above shows the empirical distribution of the permuted test statistic (the
     difference in mean game length between the two groups under random shuffling), with the
     observed difference marked in red. The observed value falls far outside the bulk of the
-    null distribution, visually confirming that the true difference in game length between
-    the missing and non-missing groups is much larger than what we'd expect from random chance
-    alone — reinforcing that games where <code>cspm</code> is missing tend to systematically
-    differ in length from games where it's present.
-  </p>
-
-  <p>
-    <strong>Test 2: Does <code>cspm</code> missingness depend on <code>firstPick</code>?</strong><br>
-    <strong>Null Hypothesis:</strong> The missingness of <code>cspm</code> does not depend on
-    <code>firstPick</code>; any observed difference is due to random chance.<br>
-    <strong>Alternative Hypothesis:</strong> The missingness of <code>cspm</code> does depend
-    on <code>firstPick</code>.
-  </p>
-
-  <p>
-    Using the difference in mean <code>firstPick</code> rate between the two groups as my test
-    statistic, I observed a difference of <strong>[observed_diff_fp]</strong>, and a permutation
-    test produced a p-value of <strong>[p_value_fp]</strong>. Since this p-value is above 0.05,
-    I <strong>fail to reject the null hypothesis</strong> — I don't have sufficient evidence
-    that <code>cspm</code>'s missingness depends on which team had first pick.
+    null distribution.
   </p>
 
   <p>
     <strong>Interpretation with respect to my question:</strong> Because <code>cspm</code>'s
     missingness is explainable by an observed column (<code>gamelength</code>) rather than
     being purely random or tied to the unobserved CS value itself, this is evidence of MAR, not
-    MCAR or MNAR. This mattered directly for my prediction question — since I ultimately use
-    <code>cspm</code>-adjacent stats in my modeling, understanding <em>why</em> values were
-    missing (and confirming it wasn't random) justified using a <code>gamelength</code>-aware
-    imputation strategy (local hot-deck sampling within a ±180 second window) rather than a
-    naive global fill, which would have introduced bias into the exact early-game signals my
-    model relies on.
+    MCAR or MNAR.
   </p>
 </section>
