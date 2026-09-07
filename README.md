@@ -637,3 +637,93 @@
     event.
   </p>
 </section>
+<section id="grouped-gold-stats">
+  <h3>Gold Statistics by Game Outcome</h3>
+
+  <div style="overflow-x: auto; overflow-y: auto; max-height: 400px; max-width: 100%; border: 1px solid #ddd;">
+    <table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th colspan="3" halign="left">goldat10</th>
+      <th colspan="3" halign="left">goldat15</th>
+      <th colspan="3" halign="left">goldat20</th>
+      <th colspan="3" halign="left">goldat25</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>mean</th>
+      <th>median</th>
+      <th>std</th>
+      <th>mean</th>
+      <th>median</th>
+      <th>std</th>
+      <th>mean</th>
+      <th>median</th>
+      <th>std</th>
+      <th>mean</th>
+      <th>median</th>
+      <th>std</th>
+    </tr>
+    <tr>
+      <th>result_label</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Loss</th>
+      <td>16646.39</td>
+      <td>16611.5</td>
+      <td>853.72</td>
+      <td>25791.61</td>
+      <td>25724.0</td>
+      <td>1449.93</td>
+      <td>35473.84</td>
+      <td>35371.0</td>
+      <td>2073.66</td>
+      <td>44766.14</td>
+      <td>44608.5</td>
+      <td>2637.98</td>
+    </tr>
+    <tr>
+      <th>Win</th>
+      <td>17366.73</td>
+      <td>17260.0</td>
+      <td>1001.33</td>
+      <td>27503.09</td>
+      <td>27261.0</td>
+      <td>1850.45</td>
+      <td>38620.10</td>
+      <td>38297.0</td>
+      <td>2812.21</td>
+      <td>49540.64</td>
+      <td>49188.0</td>
+      <td>3673.77</td>
+    </tr>
+  </tbody>
+</table>
+  </div>
+
+  <p>
+    This table breaks down the mean, median, and standard deviation of team gold at 10, 15,
+    20, and 25 minutes, separately for winning and losing teams. The gap between winning and
+    losing teams' average gold widens at each successive time stamp, suggesting that gold
+    leads tend to snowball over the course of a game rather than staying constant. An early
+    advantage tends to compound into an even larger one by the 25-minute mark. The standard
+    deviations also grow over time for both groups, reflecting the fact that games become more
+    variable the longer they go on, since more time allows for both bigger blowouts and bigger
+    comebacks.
+  </p>
+</section>
