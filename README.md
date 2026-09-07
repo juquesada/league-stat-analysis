@@ -1141,4 +1141,8 @@
     supporting the idea that early-game (15-minute) statistics are a less reliable
     predictor of the final outcome the longer a game continues.
   </p>
+   <p>
+    As a bonus since my features are standardized, I am able to determine the strongest predictor for winning the game at 15 minutes.
+    It is gold at 15 minutes. Now you know to priortize getting as much as possible as fast as possible. 
+   </p>
 </section>

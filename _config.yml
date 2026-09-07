@@ -1,5 +1,5 @@
 remote_theme: pages-themes/time-machine@v0.2.0
 plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
-title: League Stat Analysis
+title: Pre-15 min Stat Analysis
 description: What is the most important feature that influences whether or not you win a game? Is it possible to accurately predict the outcome of a game based on team stats?
