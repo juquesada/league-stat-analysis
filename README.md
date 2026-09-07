@@ -1055,3 +1055,90 @@
   </p>
   <img src="assets/cm.png" alt="Confusion Matrix">
 </section>
+<section id="fairness-analysis">
+  <h2>Fairness Analysis</h2>
+
+  <h3>Group Choice</h3>
+
+  <p>
+    <strong>Group X: Short games</strong> — teams whose <code>gamelength</code> is at or below
+    the average game length in the dataset.<br>
+    <strong>Group Y: Long games</strong> — teams whose <code>gamelength</code> is above the
+    average game length.
+  </p>
+
+  <h3>Evaluation Metric</h3>
+
+  <p>
+    I used <strong>precision</strong> (for predicting the <code>'Win'</code> class), since this
+    is a binary classification task and precision directly answers a fairness-relevant
+    question: of the teams my model predicts will win, how often is it actually correct,
+    <em>and does that reliability differ between short and long games?</em>
+  </p>
+
+  <h3>Hypotheses</h3>
+
+  <p>
+    <strong>Null Hypothesis:</strong> My model is fair. Its precision for teams in short games
+    and teams in long games is roughly the same.
+  </p>
+
+  <p>
+    <strong>Alternative Hypothesis:</strong> My model is unfair. Its precision for teams in
+    long games is lower than its precision for teams in short games.
+  </p>
+
+  <p>
+    This is a <strong>one-sided</strong> alternative, motivated by the idea that a 15-minute
+    lead is a noisier predictor of the final outcome the longer a game continues.
+  </p>
+
+  <h3>Test Statistic and Significance Level</h3>
+
+  <p>
+    <strong>Test statistic:</strong> the difference in precision between the two groups
+    (Precision<sub>Short</sub> − Precision<sub>Long</sub>). This directly matches the direction
+    specified in my alternative hypothesis, so a large positive value provides evidence in
+    favor of the alternative.
+  </p>
+
+  <p>
+    <strong>Significance level:</strong> α = 0.05, the standard threshold.
+  </p>
+
+  <p>
+    <strong>Method:</strong> Using my final fitted model's predictions (the model itself was
+    not modified or refit), I computed the observed precision for each group, then ran a
+    permutation test with 1,000 repetitions, randomly shuffling the short/long group labels
+    each time and recomputing the precision difference to build an empirical null distribution.
+  </p>
+
+  <h3>Results</h3>
+
+  <p>
+    <strong>Precision (Short games):</strong> 0.8565<br>
+    <strong>Precision (Long games):</strong> 0.6054<br>
+    <strong>Observed difference (Short − Long):</strong> 0.2512<br>
+    <strong>P-value:</strong> 0.0010
+  </p>
+
+  <iframe
+    src="assets/fairness-precision-permutation.html"
+    width="600"
+    height="600"
+    frameborder="0">
+  </iframe>
+  
+  <p>
+    This plot shows how far the p-value is from the distribution.
+  </p>
+  <h3>Conclusion</h3>
+
+  <p>
+    [If p_value &lt; 0.05:] Since the p-value is below my significance level of 0.05, I
+    <strong>reject the null hypothesis</strong>. There is a high chance that my 
+    model's precision is lower for teams in long games than for teams in short games,
+    supporting the idea that early-game (15-minute) statistics are a less reliable
+    predictor of the final outcome the longer a game continues.
+  </p>
+</section>
