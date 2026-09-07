@@ -851,12 +851,52 @@
   </p>
   <iframe
     src="assets/gold-dist.html"
-    width="800"
+    width="600"
     height="600"
     frameborder="0">
   </iframe>
   <p>
     This plot is showing the two distributions of gold at 15 minutes among losing and winning teams. As you can see the winning
-    team was a different distribution that is more to the right.
+    team has a different distribution that is more to the right.
   </p>
+</section>
+<section id="framing-a-prediction-problem">
+  <h2>Framing a Prediction Problem</h2>
+
+  <p>
+    <strong>Prediction problem:</strong> Given a team's in-game statistics at the 15-minute
+    mark, predict whether that team will ultimately <strong>win or lose</strong> the match.
+  </p>
+
+  <p>
+    <strong>Type:</strong> This is a <strong>classification</strong> problem specifically,
+    <strong>binary classification</strong>, since there are only two possible outcomes for a
+    team in a completed League of Legends match: win or lose.
+  </p>
+
+  <p>
+    <strong>Response variable:</strong> <code>result</code> (equivalently, <code>result_label</code>,
+    its human-readable "Win"/"Loss" version). I chose this as my response variable because it's
+    the direct target of my central research question. I want to know whether a team's
+    eventual outcome can be predicted from its early-game state, and <code>result</code> is
+    exactly that outcome, recorded for every game in the dataset.
+  </p>
+
+  <p>
+    <strong>Features used at "time of prediction":</strong> All of my features are restricted
+    to information that would genuinely be known by the 15-minute mark of a live game
+    (e.g., <code>goldat10</code>, <code>goldat15</code>, <code>killsat10</code>,
+    <code>killsat15</code>, <code>firstblood</code>, <code>firstdragon</code>, etc.). I
+    deliberately excluded any full-game or post-game statistics (like final <code>kills</code>,
+    <code>towers</code>, or <code>damagetochampions</code>), since those are only known after
+    the game ends and would leak information about the outcome I'm trying to predict.
+  </p>
+
+  <p>
+    <strong>Evaluation metric:</strong> I used <strong>accuracy</strong> as my primary
+    evaluation metric, since the two outcome classes (win/loss) are naturally
+    <strong>balanced</strong> — every game has exactly one winner and one loser, so the dataset
+    contains roughly equal numbers of each class by construction.
+  </p>
+
 </section>
