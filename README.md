@@ -895,8 +895,68 @@
   <p>
     <strong>Evaluation metric:</strong> I used <strong>accuracy</strong> as my primary
     evaluation metric, since the two outcome classes (win/loss) are naturally
-    <strong>balanced</strong> — every game has exactly one winner and one loser, so the dataset
+    <strong>balanced</strong>. Every game has exactly one winner and one loser, so the dataset
     contains roughly equal numbers of each class by construction.
   </p>
 
+</section>
+<section id="baseline-model">
+  <h2>Baseline Model</h2>
+
+  <p>
+    My baseline model is a <strong>Decision Tree Classifier</strong> with
+    <code>max_depth=5</code> and <code>criterion='entropy'</code>, predicting whether a team
+    wins or loses (<code>result_label</code>) using only information available at or before the
+    15-minute mark of the game.
+  </p>
+
+  <h3>Features</h3>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Type</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>firstPick</code></td><td>Nominal (binary: had first pick or not)</td></tr>
+      <tr><td><code>firstblood</code></td><td>Nominal (binary: secured first blood or not)</td></tr>
+      <tr><td><code>firstdragon</code></td><td>Nominal (binary: secured first dragon or not)</td></tr>
+      <tr><td><code>firstherald</code></td><td>Nominal (binary: secured first herald or not)</td></tr>
+      <tr><td><code>goldat10</code></td><td>Quantitative</td></tr>
+      <tr><td><code>xpat10</code></td><td>Quantitative</td></tr>
+      <tr><td><code>csat10</code></td><td>Quantitative</td></tr>
+      <tr><td><code>killsat10</code></td><td>Quantitative</td></tr>
+      <tr><td><code>assistsat10</code></td><td>Quantitative</td></tr>
+      <tr><td><code>deathsat10</code></td><td>Quantitative</td></tr>
+      <tr><td><code>goldat15</code></td><td>Quantitative</td></tr>
+      <tr><td><code>xpat15</code></td><td>Quantitative</td></tr>
+      <tr><td><code>csat15</code></td><td>Quantitative</td></tr>
+      <tr><td><code>killsat15</code></td><td>Quantitative</td></tr>
+      <tr><td><code>assistsat15</code></td><td>Quantitative</td></tr>
+      <tr><td><code>deathsat15</code></td><td>Quantitative</td></tr>
+    </tbody>
+  </table>
+
+  <p>
+    In total, the model uses <strong>16 features</strong>: 4 nominal (binary) "first ___" flags
+    and 12 quantitative early-game statistics captured at the 10- and 15-minute marks.
+  </p>
+
+  <h3>Performance</h3>
+
+  <p>
+    The baseline model achieved a <strong>training accuracy of 0.741</strong> and a
+    <strong>test accuracy of 0.714</strong>.
+  </p>
+
+  <h3>Is this a "good" model?</h3>
+
+  <p>
+    I believe this baseline model is a good model. Since we are predicting win/loss and 
+    there is an even number of each in the dataset, any accuracy percantage significantly larger than
+    50% (which would be guessing or all win/all loss) has reasonable predicting power. Although I think 
+    that it can get better.
+  </p>
 </section>
