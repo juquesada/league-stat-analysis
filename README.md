@@ -620,3 +620,20 @@
     this point in the game.
   </p>
 </section>
+<section id="firstblood-kills-relationship">
+  <h3>Total Kills by First Blood Status</h3>
+
+  <iframe
+    src="assets/firstblood-kills.html"
+    width="800"
+    height="600"
+    frameborder="0">
+  </iframe>
+
+  <p>
+    Teams that secure first blood tend to finish the game with a higher mean total kill
+    count than teams that don't, suggesting that winning the opening skirmish often sets the
+    tone for a more aggressive, kill-heavy game overall rather than being an isolated early
+    event.
+  </p>
+</section>
