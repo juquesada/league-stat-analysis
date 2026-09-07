@@ -791,3 +791,72 @@
     MCAR or MNAR.
   </p>
 </section>
+<section id="hypothesis-testing">
+  <h2>Hypothesis Testing</h2>
+
+  <h3>Question: Does gold at 15 minutes influence win rate?</h3>
+
+  <p>
+    <strong>Null Hypothesis:</strong> There is no difference in mean gold at 15 minutes
+    between teams that win and teams that lose. Any observed difference is due to random
+    chance.
+  </p>
+
+  <p>
+    <strong>Alternative Hypothesis:</strong> Teams that win have a higher mean gold at 15
+    minutes than teams that lose.
+  </p>
+
+  <p>
+    <strong>Test statistic:</strong> Difference in means (mean <code>goldat15</code> for
+    winning teams minus mean <code>goldat15</code> for losing teams). I chose this statistic
+    because it directly captures the quantity my hypothesis is about. It is a signed difference in
+    average gold. Since my alternative hypothesis is directional (winners have <em>higher</em> gold, not just
+    <em>different</em> gold), a signed test statistic lets me run a one-sided test, which
+    matches the actual claim I'm testing.
+  </p>
+
+  <p>
+    <strong>Significance level:</strong> I used the standard threshold of
+    <strong>α = 0.05</strong>
+  </p>
+
+  <p>
+    <strong>Method:</strong> I ran a permutation test with 10,000 repetitions, shuffling the
+    <code>result</code> labels and recomputing the difference in mean <code>goldat15</code>
+    between the two (now randomly assigned) groups each time. This builds an empirical null
+    distribution representing what the test statistic would look like if win/loss had no
+    real relationship to gold at 15 minutes.
+  </p>
+
+  <p>
+    <strong>Result:</strong> The observed difference in mean gold at 15 minutes (Win − Loss)
+    was <strong>1711.48</strong>, and the resulting p-value was
+    <strong>0.00000</strong>.
+  </p>
+
+  <p>
+    <strong>Conclusion:</strong> Since the p-value is far below my significance level of 0.05,
+    I <strong>reject the null hypothesis</strong> in favor of the alternative that winning teams have 
+    a higher average gold at 15 minutes than losing teams
+  </p>
+
+  <p>
+    <strong>Why these choices are appropriate:</strong> A permutation test is good here
+    because we are trying to see if they come from the same distribution or not. Using the raw difference in
+    means as the test statistic is both interpretable and directly
+    aligned with the direction specified in my alternative hypothesis, making the one-sided
+    p-value a faithful measure of the specific claim I set out to test. It also gives an example of how 
+    gold at 15 minutes is a feature that can help predict the overall outcome of the game.
+  </p>
+  <iframe
+    src="assets/gold-dist.html"
+    width="800"
+    height="600"
+    frameborder="0">
+  </iframe>
+  <p>
+    This plot is showing the two distributions of gold at 15 minutes among losing and winning teams. As you can see the winning
+    team was a different distribution that is more to the right.
+  </p>
+</section>
