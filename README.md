@@ -607,7 +607,7 @@
   <h3>Distribution of Gold at 15 Minutes</h3>
 
   <iframe
-  src="/Users/justinquesada/Desktop/league-stat-analysis/gold-at-15-distribution.html"
+  src="assets/gold-at-15-distribution.html"
   width="800"
   height="600"
   frameborder="0"
